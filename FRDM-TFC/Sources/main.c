@@ -128,11 +128,23 @@ void pid()
 			//-----------------Proportional------------------------
 			proportional = difference * kp;
 			//-------------------Integral--------------------------
+			
+			if (difference == 0 || (integral / abs(integral)) != (prevposition / abs(prevposition)))
+			{
+			integral = 0;
+			}
+			else
+			{
 			integral += difference;
 			integrald = integral * ki;
+			}
+			//integral += difference;
+			//integrald = integral * ki;
+		
 			//------------------Derivative-------------------------
 			rate = -prevposition + difference;
 			derivative = rate * kd;
+		
 			//--------------------Control--------------------------
 			control = proportional+derivative+integrald;
 			integral /= 1.3;
