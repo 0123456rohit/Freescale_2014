@@ -2,7 +2,7 @@
 #include "TFC\TFC.h"
 #include "Math.h"
 float comp[128],thr,mean=0,sd=0,sum=0,temp1=0,flag=0,pos=0,spos=0,Result[128];
-float p,ccen=85,cen=0;
+float p,ccen=0,cen=0;
 int lw=0,l=0;
 float difference=0;
 float derivative=0,proportional=0,integral=0,integrald=0,rate=0,prevposition=0,control=0;
@@ -119,10 +119,10 @@ else
 }
 
 void pid()
-{
+{        pos=(pos/2)-1;  
 	 difference=ccen-pos;
 		//-------------------------PID Algorithm-----------------------------------
-		if(difference>5 || difference<-5)	
+		if(difference>0.1 || difference<-0.1)	
 		{
 
 			//-----------------Proportional------------------------
@@ -159,7 +159,7 @@ void pid()
 	     }
 	     
 	     prevposition=difference;
-	    spos=spos/35; 
+	    //spos=spos/35; 
 	 	
 	    if(spos>1)
 	 	{
